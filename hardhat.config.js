@@ -2,6 +2,7 @@ require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 require("@nomiclabs/hardhat-etherscan");
 require("hardhat-deploy");
+// REPORT_GAS=true npx hardhat test (--network goerli)
 
 const PK = process.env.PK || "";
 const ALCHEMY = process.env.ALCHEMY || "";
@@ -24,7 +25,13 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.17",
+        version: "^0.8.17",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
     ],
   },
